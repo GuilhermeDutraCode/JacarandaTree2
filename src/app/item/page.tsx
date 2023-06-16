@@ -1,8 +1,9 @@
-import Navbar from "@/home/Navbar";
 import Header from "./Header";
 import Ad from "./Ad";
 import Similar from "./Similar";
-import Footer from "@/home/Footer";
+import Footer from "../home/Footer";
+import Navbar from "../home/Navbar";
+
 
 export default function Item(){
     return(
