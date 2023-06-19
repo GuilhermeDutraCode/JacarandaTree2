@@ -1,11 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import {faker, fakerEN_AU} from "@faker-js/faker"
-import { PrismaClient } from "@prisma/client";
+import prisma from "../../../../lib/prisma";
 const bcrypt = require('bcryptjs');
-
-
-const prisma = new PrismaClient();
-
 
 type Category = {
     id: number;
@@ -22,25 +18,25 @@ export async function GET(
     req: NextApiRequest,
     res: NextApiResponse<Data>
 ){
-    await prisma.category.deleteMany();
-    await prisma.item.deleteMany();
-    await prisma.user.deleteMany();
+    // await prisma.category.deleteMany();
+    // await prisma.item.deleteMany();
+    // await prisma.user.deleteMany();
 
-    await prisma.category.createMany({
-        data:
-            [{ name: "Cars & Vehicle"},
-            {name: "Pets"},
-            {name: "Real State"},
-            {name: "Jobs"},
-            {name: "Baby & Children"},
-            {name: "Clothing & Jewellery"},
-            {name: "Electronics & Computers"},
-            {name: "Sports & Fitness"},
-            {name: "Books, Music & Games"},
-            {name: "Tickets"}]
-    });
+    // await prisma.category.createMany({
+    //     data:
+    //         [{ name: "Cars & Vehicle"},
+    //         {name: "Pets"},
+    //         {name: "Real State"},
+    //         {name: "Jobs"},
+    //         {name: "Baby & Children"},
+    //         {name: "Clothing & Jewellery"},
+    //         {name: "Electronics & Computers"},
+    //         {name: "Sports & Fitness"},
+    //         {name: "Books, Music & Games"},
+    //         {name: "Tickets"}]
+    // });
 
-    const items = await prisma.item.findMany();
+   const items = await prisma.item.findMany();
     const users = await prisma.user.findMany();
     const categories = await prisma.category.findMany();
 
@@ -76,104 +72,124 @@ export async function GET(
 
     let allCategories = [carsAndVehicle, pets, realState, jobs, babyAndChildren, clothingJewellery, electronicsComputer, sportsFitness, booksMusicGames, tickets]     
 
-    const generateFakeUser = async ( ) => {
-        const users = [];
+    /////////////////////////////////////////////////////
 
-        const firstName = faker.person.firstName();
-        const lastName = faker.person.lastName()
-        const address = fakerEN_AU.location.streetAddress();
-        const suburb = fakerEN_AU.location.city();
-        const plainPassword = faker.internet.password();
-        const password = await bcrypt.hash(plainPassword, 10)
-        const state = fakerEN_AU.location.state();
-        const postcode = fakerEN_AU.location.zipCode();
-        const cardNumber = fakerEN_AU.finance.creditCardNumber();
-        const nameOnCard = `${firstName} ${lastName}`;
-        const expiringDate = fakerEN_AU.date.future().toLocaleDateString();
-        const lastDigits = faker.number.int({min: 111, max: 999})
-        const profilePic = faker.image.urlLoremFlickr({ category: 'people' })
+//     const generateFakeUser = async ( ) => {
+//         const users = [];
+
+//         const firstName = faker.person.firstName();
+//         const lastName = faker.person.lastName()
+//         const address = fakerEN_AU.location.streetAddress();
+//         const suburb = fakerEN_AU.location.city();
+//         const email = faker.internet.email();
+//         const plainPassword = faker.internet.password();
+//         const password = await bcrypt.hash(plainPassword, 10)
+//         const state = fakerEN_AU.location.state();
+//         const postcode = fakerEN_AU.location.zipCode();
+//         const cardNumber = fakerEN_AU.finance.creditCardNumber();
+//         const nameOnCard = `${firstName} ${lastName}`;
+//         const expiringDate = fakerEN_AU.date.future().toLocaleDateString();
+//         const lastDigits = faker.number.int({min: 111, max: 999})
+//         const profilePic = faker.image.urlLoremFlickr({ category: 'people' })
         
-        users.push({
-            first_name: firstName,
-            last_name: lastName,
-            password,
-            address,
-            suburb,
-            state,
-            postcode,
-            card_number: cardNumber,
-            name_on_card: nameOnCard,
-            expiring_date: expiringDate,
-            last_digits: lastDigits.toString(),
-            profile_pic: profilePic,
-        });
+//         users.push({
+//             first_name: firstName,
+//             last_name: lastName,
+//             password,
+//             address,
+//             suburb,
+//             email,
+//             state,
+//             postcode,
+//             card_number: cardNumber,
+//             name_on_card: nameOnCard,
+//             expiring_date: expiringDate,
+//             last_digits: lastDigits.toString(),
+//             profile_pic: profilePic,
+//         });
         
         
-        prisma.user
-        .create({
-            data: users[0],
-             })
-        .then((createdUser) => {
-      console.log('User created:', createdUser);
-        })
-        .catch((error) => {
-      console.error('Error creating user:', error);
-        });
+//         prisma.user
+//         .create({
+//             data: users[0],
+//              })
+//         .then((createdUser: any) => {
+//       console.log('User created:', createdUser);
+//         })
+//         .catch((error: any) => {
+//       console.error('Error creating user:', error);
+//         });
 
-        return users;
-};
+//         return users;
+// };
 
-     generateFakeUser();
+//      const generateMultipleUsers = () => {
+//         let i = 0
+//         while (i < 100){
+//             generateFakeUser()
+//             i++
+//         }
+//      }
 
+//      generateMultipleUsers()
+   
 
-    return new Response("Meow");
-    // const generateFakeItems = (count: number) => {
-    //     const items = []
+     ///////////////////////////////////////////////=/
 
-    //     let getRandomCategory = () => {
-    //         let random = Math.floor(Math.random() * allCategories.length) + 1;
-    //         return allCategories[random];
-    //     }
+      let randomNum = function getRandomNumber() {
+        let num = Math.floor(Math.random() * 30) + 1;
+        // let getAllUsers = await prisma.user.findMany()
+        let getARandomUserId = users[num].id
+        return getARandomUserId
+      }
 
-    //     let getRandomUserId = async () => {
-    //         const users = await prisma.user.findMany();
-    //         if (!users || users.length === 0) {
-    //             throw new Error('No users available');
-    //           }
-              
-    //         const randomIndex = Math.floor(Math.random() * users.length);
-    //         const randomUser = users[randomIndex]
-    //         const user_id = randomUser.id;
-    //         return user_id
-    //     }
+      let randomCat =  function getRandomCategory(){
+        const randomIndex = Math.floor(Math.random() * allCategories.length);
+        return allCategories[randomIndex]
+      }
+       
+      const createItem = async () => {
+        const name = faker.commerce.productName()
+        const price = faker.commerce.price()
+        const description = faker.commerce.productDescription()
+        const location = `${fakerEN_AU.location.city()}, ${fakerEN_AU.location.state()}`
+        const slug = faker.lorem.slug({ min: 1, max: 3 })
+        const mainImage = faker.image.url()
+        const images = [faker.image.url(), faker.image.url(), faker.image.url(), faker.image.url()]
+        const user_id = randomNum()
+        const category_id = randomCat()
 
-    //     for (let i=0; i < count; i++){
-    //         const price = faker.commerce.price();
-    //         const description = faker.commerce.productDescription();
-    //         const name = faker.commerce.productName();
-    //         const location = `${fakerEN_AU.location.city}, ${fakerEN_AU.location.state}`
-    //         const slug = faker.helpers.slugify(name);
-    //         const category_id = getRandomCategory();
-    //         const user_id = getRandomUserId();
+        try {
+            const newItem = await prisma.item.create({
+              data: {
+                name,
+                price,
+                description,
+                location,
+                slug,
+                images: images,
+                main_image: mainImage,
+                user: { connect: { id: user_id } },
+                category: { connect: { id: category_id } },
+              },
+            });
+        
+            console.log('New item created:', newItem);
+          } catch (error) {
+            console.error('Error creating item:', error);
+          } finally {
+            await prisma.$disconnect();
+          }
+      }
+      
+    const createManyItems = () => {
+      let i= 0
+      while (i < 300){
+        createItem()
+        i++
+      }
+    }
+    createManyItems()
 
-    //         items.push({
-    //             name: name,
-    //             price: price,
-    //             description: description,
-    //             location: location,
-    //             slug: slug,
-    //             category_id: category_id,
-    //             user_id: user_id,
-    //         });
-    //     } 
-    //     return items
-    // };
-
-    // const fakeItems = generateFakeItems(120);
-
-    // await prisma.item.createMany({
-    //     data: fakeItems,
-    // })
-
-    
+    return new Response("_Christo");
 }

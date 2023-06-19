@@ -32,6 +32,7 @@
   },
   "devDependencies": {
     "@faker-js/faker": "^8.0.2",
+    "@prisma/nextjs-monorepo-workaround-plugin": "^4.15.0",
     "@types/bcrypt": "^5.0.0",
     "@types/node": "^20.3.1",
     "ts-node": "^10.9.1",

@@ -6,6 +6,7 @@ import SearchBar from "./home/SearchBar";
 
 
 export default function Home() {
+ 
   return (
     <main>   
         <Navbar />
