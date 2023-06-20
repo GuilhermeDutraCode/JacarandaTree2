@@ -2,7 +2,7 @@
 import Image from 'next/image';
 import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-react-carousel';
 import 'pure-react-carousel/dist/react-carousel.es.css';
-import exampleCar from '../../../images/car3.jpeg'
+import exampleCar from '../../../../images/car3.jpeg'
 
 
 export default function Similar (){
