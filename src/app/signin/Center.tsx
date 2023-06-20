@@ -1,4 +1,4 @@
-import Footer from "@/home/Footer";
+'use client'
 import Link from "next/link";
 
 export default function Center(){
