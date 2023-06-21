@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import prisma from '../../../../lib/prisma';
 import * as jose from "jose";
+import { KeyObject } from 'crypto';
 const bcrypt = require('bcryptjs');
 
 export async function POST(req: any){
@@ -16,14 +17,16 @@ export async function POST(req: any){
             }
         })
         console.log(isLogin);
-       const alg = "HS256";
+       const alg: any = "HS256";
 
        const secret = new TextEncoder().encode(process.env.JWT_SECRET)
 
        const token = await new jose.SignJWT({email: user.email})
         .setProtectedHeader({alg})
         .setExpirationTime("24h")
-        .sign()
+        .sign(secret)
+        
+        return NextResponse.json(secret)
     } catch (error) {
       console.log(error);     
     }
