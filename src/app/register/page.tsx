@@ -1,4 +1,3 @@
-import Footer from "@/home/Footer";
 import Center from "./Center";
 import Navbar from "./Navbar";
 

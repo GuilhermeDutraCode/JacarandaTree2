@@ -4,11 +4,7 @@ import Item from "./Item";
 
 
 
-export default  function Gallery (items: any){
-
-  // const items = await prisma.item.findMany({ take: 20 })
- console.log(items.items[2].price);
-  
+export default  function Gallery (items: any){  
   return(
     <div>
       <h1 className="tracking-wide text-green-700 text-center underline text-lg font-bold">Homepage Gallery</h1>
