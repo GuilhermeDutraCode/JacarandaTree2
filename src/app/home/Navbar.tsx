@@ -11,9 +11,17 @@ export default function Navbar(){
   let isLogin = false
   const { error, loading, data, setAuthState } = useContext(AuthenticationContext)
   console.log(data);
-  
+
   if(data){
     isLogin = true
+  }
+
+  const handleClick = () => {
+    setAuthState({
+      data: null,
+      error: null,
+      loading: false
+  })
   }
 
     return (
@@ -27,9 +35,30 @@ export default function Navbar(){
           <Link href="/" className='text-slate-50 px-9'><p>Real State</p></Link>
           <Link href="/" className='text-slate-50 px-9'><p>Services for Hire</p></Link>
           <Link href="/" className='text-slate-50 px-9'><p>More...</p></Link>
-          <Link href="/signin" className='text-slate-50 px-10 relative left-14'> <p>Sign In</p></Link>
-          <Link href="/register" className='text-slate-50 px-10 relative left-10'><p>Register</p></Link>
-          <Link href="/" className='bg-fuchsia-900 text-slate-50 px-10 relative left-10 border border-fuchsia-200'><p>My Jacaranda</p></Link>
+          {isLogin ? (
+            <>
+              <Link href="/" className='text-slate-50 px-10 relative left-10'>
+              <button onClick={handleClick}>Sign Out</button>
+            </Link>
+              
+            </>
+          ) : (
+            <>
+              <Link href="/signin" className='text-slate-50 px-10 relative left-10'>
+                <p>Sign In</p>
+              </Link>
+              <Link href="/register" className='text-slate-50 px-10 relative left-10'>
+                <p>Register</p>
+              </Link>
+            </>
+          )
+          }
+          
+          {isLogin ? (
+            <Link href="/" className='bg-fuchsia-900 text-slate-50 px-10 relative left-10 border border-fuchsia-200'><p>{data?.first_name}</p></Link>
+          ) : (<Link href="/" className='bg-fuchsia-900 text-slate-50 px-10 relative left-10 border border-fuchsia-200'><p>My Jacaranda</p></Link>)}
+
+          
         </nav>
     )
 }

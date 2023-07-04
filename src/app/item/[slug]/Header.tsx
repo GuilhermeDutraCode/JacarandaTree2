@@ -9,7 +9,7 @@ export default function Header(){
             <Link href="/" className='py-2 pl-8 text-white text-2xl font-bold'><FontAwesomeIcon className='h-8 inline' icon={faTree} style={{color: "#ffffff",}} /> JacarandaTree</Link>
             <button className="bg-white float-right h-10 w-32 font-bold rounded-sm drop-shadow-lg">Post an add</button>
             </div>
-            <div className="block w-full h-16 text-center drop-shadow-xl">
+            <div className="block w-full h-10 mb-3 text-center drop-shadow-xl">
                     <select className="h-16 w-44">
                         <option value="Cars">All Categories</option>
                         <option value="Cars">Cars & Vehicles</option>
