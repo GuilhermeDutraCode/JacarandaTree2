@@ -6,6 +6,7 @@ import Navbar from "./home/Navbar";
 import SearchBar from "./home/SearchBar";
 
 
+
 export default async function Home() {
 
   const items = await prisma.item.findMany({ take: 10 })

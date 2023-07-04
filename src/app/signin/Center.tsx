@@ -1,9 +1,14 @@
 'use client'
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import axios from "axios";
+import { AuthenticationContext } from "../context/AuthContext";
 
 export default function Center(){
+    const { error, loading, data, setAuthState } = useContext(AuthenticationContext)
+    console.log(data);
+    
+
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
 
@@ -23,7 +28,13 @@ export default function Center(){
             }
         )
         const cleanRes = await res.json();
-        console.log(cleanRes);  
+        console.log(cleanRes);
+
+        setAuthState({
+            data: cleanRes,
+            error: null,
+            loading: false
+        })
     }
 
     return(

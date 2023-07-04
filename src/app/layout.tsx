@@ -1,3 +1,4 @@
+import AuthContext from './context/AuthContext'
 import './globals.css'
 import { Inter } from 'next/font/google'
 
@@ -15,7 +16,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className='bg-gray-100'>{children}</body>
+      <body className='bg-gray-100'>
+        <AuthContext>{children}</AuthContext>
+      </body>
     </html>
   )
 }

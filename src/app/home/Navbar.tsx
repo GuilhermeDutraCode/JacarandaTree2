@@ -1,9 +1,21 @@
+'use client'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHouseChimney } from '@fortawesome/free-solid-svg-icons'
-import { ReactElement } from 'react'
 import Link from 'next/link'
+import { useContext } from "react";
+import { AuthenticationContext } from "../context/AuthContext";
+
+
 
 export default function Navbar(){
+  let isLogin = false
+  const { error, loading, data, setAuthState } = useContext(AuthenticationContext)
+  console.log(data);
+  
+  if(data){
+    isLogin = true
+  }
+
     return (
         <nav className="bg-fuchsia-950 p-2 flex h-10 pl-14">
           <Link href="/"><FontAwesomeIcon icon={faHouseChimney} style={{color: "#ffffff", width: "23px", height: "23px"}}/></Link>

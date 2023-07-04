@@ -16,7 +16,7 @@ export default function SearchBar(){
                 <h2 className="text-white font-bold text-xl pl-8">JacarandaTree</h2>
                 <h2 className="text-white font-bold text-3xl p-8">Trade Together, Save Together</h2>
                 <button className="text-white font-bold bg-green-600 rounded p-4 float-right m-4">Post an add</button>
-                <div className="block w-full pt-32 text-center">
+                <div className="block w-full pt-20 text-center">
                     <select className="h-12 w-44" name="all_categories" id="all_categories">
                         <option value="Cars">All Categories</option>
                         <option value="Cars">Cars & Vehicles</option>
@@ -32,9 +32,9 @@ export default function SearchBar(){
                     </select>
                     <input className="h-12 w-2/4 border border-emerald-400" type="text" placeholder="I'm looking for..." />
                     <input className="h-12" type="text" placeholder=" Australia" />
-                    <FontAwesomeIcon className="h-12 bg-green-600 p-2 inline" 
+                    <button >     <FontAwesomeIcon className="h-10 bg-green-600 p-2" 
                     icon={faMagnifyingGlass} 
-                    style={{color: "#ffffff"}}/>
+                    style={{color: "#ffffff"}}/></button>
                 </div>
             </div>
         </div>

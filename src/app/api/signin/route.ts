@@ -1,10 +1,11 @@
 import { NextResponse } from 'next/server'
 import prisma from '../../../../lib/prisma';
 import * as jose from "jose";
-import { KeyObject } from 'crypto';
 const bcrypt = require('bcryptjs');
+import { setCookie } from 'cookies-next';
+import { cookies } from 'next/headers'
 
-export async function POST(req: any){
+export async function POST(req: any, res: any){
     const body : any = await req.text(); // Consume the ReadableStream and get the body as a string
     const user = JSON.parse(body)
     const hashedPassword = await bcrypt.hash(user.password, 10)
@@ -16,6 +17,7 @@ export async function POST(req: any){
                 password: user.password
             }
         })
+        
         console.log(isLogin);
        const alg: any = "HS256";
 
@@ -25,12 +27,19 @@ export async function POST(req: any){
         .setProtectedHeader({alg})
         .setExpirationTime("24h")
         .sign(secret)
+
+       
+        try {
+            cookies().set('jwt', token)
+        } catch (error) {
+            console.log(error);
+        }
         
-        return NextResponse.json(secret)
+        return NextResponse.json(isLogin)
     } catch (error) {
       console.log(error);     
     }
     
     
-    return NextResponse.json("MEEow")
+    return NextResponse.json("Failed to Sign in")
 }
