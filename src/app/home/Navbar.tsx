@@ -55,8 +55,8 @@ export default function Navbar(){
           }
           
           {isLogin ? (
-            <Link href="/" className='bg-fuchsia-900 text-slate-50 px-10 relative left-10 border border-fuchsia-200'><p>{data?.first_name}</p></Link>
-          ) : (<Link href="/" className='bg-fuchsia-900 text-slate-50 px-10 relative left-10 border border-fuchsia-200'><p>My Jacaranda</p></Link>)}
+            <Link href="/myaccount" className='bg-fuchsia-900 text-slate-50 px-10 relative left-10 border border-fuchsia-200'><p>{data?.first_name}</p></Link>
+          ) : (<Link href="/signin" className='bg-fuchsia-900 text-slate-50 px-10 relative left-10 border border-fuchsia-200'><p>My Jacaranda</p></Link>)}
 
           
         </nav>
