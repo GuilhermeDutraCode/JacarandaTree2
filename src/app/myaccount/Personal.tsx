@@ -1,20 +1,22 @@
 'use client'
-import {  ChangeEvent, useContext, useState } from "react";
+import { useContext, useState } from "react";
 import { AuthenticationContext } from "../context/AuthContext";
-import { log } from "console";
+
 
 export default function Personal () {
     const { error, loading, data, setAuthState } = useContext(AuthenticationContext)
    
     const [ formData, setFormData ] = useState({
-        firstName: "",
-        lastName: "",
-        address: "",
-        suburb: "",
-        state: "",
-        postcode: "",
+        firstName: data?.first_name,
+        lastName: data?.last_name,
+        address: data?.address,
+        suburb: data?.suburb,
+        state: data?.state,
+        postcode: data?.postcode,
         id: 0
     });
+
+    const [success, setSuccess] = useState(false);
    
     const handleChange = (e: any) => {
         setFormData({
@@ -37,15 +39,25 @@ export default function Personal () {
             }
         )
         const response = await res.json();
-        console.log(response);
+        if(response){
+            setSuccess(true);
+            setTimeout(function(){
+                setSuccess(false)
+            }, 2500);
+        }
+        console.log(success);
         
     };
+    
 
     return (
         <div className="flex justify-center ...">
             <div className="w-3/4">
                 <h1 className="text-lg py-2 pl-6">Personal Information</h1>
                 <form onSubmit={handleSubmit} className="bg-white drop-shadow-lg p-4">
+                    {success? (
+                        <h1 className="bg-green-600 text-white w-80 text-center">Information Updated Successfully.</h1>
+                    ) : null}
                     <h1>First Name</h1>
                     <input
                     onChange={handleChange}

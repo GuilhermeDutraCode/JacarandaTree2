@@ -16,7 +16,9 @@ export default async function  Advertisement({slug}: any) {
             id: item?.user_id
         }
     })
-      
+    
+    console.log(item)
+
     return (
         <div className="flex justify-center p-2 h-fit drop-shadow-lg rounded">
         <div className="w-1/2 h-96">
@@ -54,7 +56,7 @@ export default async function  Advertisement({slug}: any) {
              <FontAwesomeIcon 
              className="h-10 w-10 inline px-2" 
              icon={faMessage} />
-                 Sign in to message
+                 <Link href={`/checkout/${item?.slug}`}> Sign in to message</Link>
              </button>
              <p className="text-sm text-center text-slate-700">
                 <FontAwesomeIcon 

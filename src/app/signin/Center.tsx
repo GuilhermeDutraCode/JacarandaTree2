@@ -29,12 +29,16 @@ export default function Center(){
         )
         const cleanRes = await res.json();
         console.log(cleanRes);
-
-        setAuthState({
-            data: cleanRes,
-            error: null,
-            loading: false
-        })
+        if(cleanRes !== "Failed to Sign in"){
+            setAuthState({
+                data: cleanRes,
+                error: null,
+                loading: false
+            })
+            alert("Succesfiully signed in")
+        } else (
+            alert("wrong password or username")
+        )
     }
 
     return(

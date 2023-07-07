@@ -11,8 +11,8 @@ export default function Page (){
         <Navbar />
         <Subnav />
         <Personal />
-        <Password />
         <Email />
+        <Password />
         <Footer />
     </main>
    )
