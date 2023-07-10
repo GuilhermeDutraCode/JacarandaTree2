@@ -1,14 +1,15 @@
 import Footer from "../home/Footer";
 import Navbar from "../home/Navbar";
-import Header from "../item/Header";
 import Feed from "./Feed";
+import Searcha from "./Search";
+
 
 
 export default function Search(){
     return(
         <main>
             <Navbar />
-            <Header />
+            <Searcha />
             <Feed />
             <Footer />
         </main>

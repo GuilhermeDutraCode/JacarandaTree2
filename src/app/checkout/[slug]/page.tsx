@@ -4,6 +4,8 @@ import { usePathname } from 'next/navigation';
 import Navbar from '@/app/register/Navbar';
 import Order from './Order';
 import PayPal from './PayPal';
+import Adress from './Adress';
+import Footer from '@/app/home/Footer';
 
 export default function Page() {
   const pathname = usePathname();
@@ -29,7 +31,8 @@ export default function Page() {
     <div>
       <Navbar />
       {cleanResponse && <Order props={cleanResponse} />}
-      <PayPal />
+      <Adress />
+      <Footer />
     </div>
   );
 }
